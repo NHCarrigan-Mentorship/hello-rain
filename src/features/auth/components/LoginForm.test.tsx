@@ -112,4 +112,14 @@ describe("LoginForm", () => {
 
     resolveLogin();
   });
+
+  it("does not submit if required fields are empty", async () => {
+    renderWithProviders(<LoginForm />);
+
+    const user = userEvent.setup();
+
+    await user.click(screen.getByRole("button", { name: /sign in/i }));
+
+    expect(mockLogin).not.toHaveBeenCalled();
+  });
 });
