@@ -106,4 +106,37 @@ describe("SignUpForm", () => {
     expect(await screen.findByText("Error signing up.")).toBeInTheDocument();
     expect(mockNavigate).not.toHaveBeenCalled();
   });
+
+  it("disables submit when signing up", async () => {
+    let resolveSignUp!: () => void;
+    const signUpPromise = new Promise<void>((resolve) => {
+      resolveSignUp = resolve;
+    });
+
+    mockSignUp.mockResolvedValueOnce(signUpPromise);
+
+    renderWithProviders(<SignUpForm />);
+
+    const user = userEvent.setup();
+
+    const email = "janedoe@email.com";
+    const fullName = "Jane Doe";
+    const username = "janedoe";
+    const password = "9A%L^NmrYAnG%K";
+
+    await user.type(screen.getByLabelText("Email"), email);
+    await user.type(screen.getByLabelText("Full Name"), fullName);
+    await user.type(screen.getByLabelText("Username"), username);
+    await user.type(screen.getByLabelText("Password"), password);
+
+    await user.click(screen.getByRole("button", { name: /sign up/i }));
+
+    const loadingButton = await screen.findByRole("button", {
+      name: /signing up/i,
+    });
+
+    expect(loadingButton).toBeDisabled();
+
+    resolveSignUp();
+  });
 });
