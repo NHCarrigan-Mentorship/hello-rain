@@ -1,4 +1,4 @@
-import { motion, type PanInfo } from "framer-motion";
+import type { PanInfo } from "motion/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useProfiles from "../../../shared/hooks/useProfiles";
@@ -246,7 +246,7 @@ export default function FeaturedProfiles() {
         </div>
         {/* Mobile Swipe Hint - Only show on first load */}
         {currentIndex === 0 && featuredProfiles.length > 1 && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 1 }}
             animate={{ opacity: 0 }}
             transition={{ delay: 3, duration: 1 }}
@@ -255,7 +255,7 @@ export default function FeaturedProfiles() {
             <LazyIcon name="ChevronsLeft" className="w-3 h-3" />
             <span>Swipe to explore more profiles</span>
             <LazyIcon name="ChevronsRight" className="w-3 h-3" />
-          </motion.div>
+          </MotionDiv>
         )}
       </div>
     );

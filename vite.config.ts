@@ -24,7 +24,7 @@ export default defineConfig({
       "@supabase/storage-js",
       "react-markdown",
       "remark-gfm",
-      "framer-motion",
+      "motion",
     ],
   },
   build: {
@@ -47,7 +47,8 @@ export default defineConfig({
           if (pkgName === "react" || pkgName === "react-dom")
             return "react-vendor";
           if (pkgName.startsWith("@supabase")) return "supabase-vendor";
-          if (pkgName === "framer-motion") return "framer-motion-vendor";
+          if (pkgName === "motion" || pkgName === "framer-motion")
+            return "motion-vendor";
           if (pkgName === "lucide-react") return "icons-vendor";
 
           return `vendor-${pkgName.replace("@", "").replace("/", "-")}`;
