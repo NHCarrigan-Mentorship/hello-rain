@@ -19,9 +19,6 @@ export default defineConfig({
     // Pre-bundle heavy deps so they aren't duplicated in multiple chunks
     include: [
       "@supabase/supabase-js",
-      "@supabase/auth-js",
-      "@supabase/realtime-js",
-      "@supabase/storage-js",
       "react-markdown",
       "remark-gfm",
       "motion",
